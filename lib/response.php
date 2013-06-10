@@ -2,6 +2,11 @@
 
 class Response
 {
+  public function redirect($to)
+  {
+    header('Location: ' . $to);
+  }
+
   public function send($string)
   {
     header('Content-type: text/plain');

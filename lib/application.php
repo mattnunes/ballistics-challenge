@@ -3,10 +3,19 @@
 class Application
 {
   private $router;
+  private static $dbh;
 
   function __construct()
   {
     $this->router = new Router();
+  }
+
+  public static function getPDO() {
+    if (!self::$dbh) {
+      self::$dbh = new PDO('mysql:host=localhost;dbname=ballistics', 'test', 'test');
+      self::$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+    return self::$dbh;
   }
 
   public function get($route, $handler)

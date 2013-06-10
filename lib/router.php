@@ -50,9 +50,9 @@ class Router
     foreach ($routes as $pattern => $handler) {
       $result = preg_match($pattern, $request->path, $matches);
       if ($result == 1) {
-        $request->route = $hander['route'];
         $request->pattern = $pattern;
         $request->path_matches = $matches;
+        $request->route = $handler['route'];
         call_user_func($handler['handler'], $request, $response);
       }
     }

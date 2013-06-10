@@ -1,12 +1,12 @@
 <?php
 
-  define("DEBUG", false);
+  define("DEBUG", true);
 
   spl_autoload_register(function($className){
     include "lib/" . $className . ".php";
   });
 
-  if (DEBUG) {
+  if (!DEBUG) {
     include "lib/error-handling.php";
   }
 
