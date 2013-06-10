@@ -7,10 +7,6 @@
     include_once $filename;
   }
 
-  if (!DEBUG) {
-    include "lib/error-handling.php";
-  }
-
   $app = new Application();
 
   foreach (glob("app/*/*.php") as $filename)
