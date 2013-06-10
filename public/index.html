@@ -38,25 +38,27 @@
       <a class="btn" href="#" ng-hide="intersects" ng-click="onValueChange()">Fire!</a>
       <a class="btn" href="#" ng-show="intersects" ng-click="init()">Try again!</a>
     </p>
-    <h3>Output</h3>
-    <p ng-show="working == 1">
-      <div class='will hit' ng-show="intersects">
-        Target will be hit in {{intersects_in}} seconds!
-      </div>
-      <div class='will miss' ng-hide="intersects"> 
-          <div ng-show="miss_by < 0">
-            Projectile will hit the ground {{Math.round(targetDistance - range)}} meters before the target.
-            <p><em>Hint: try increasing your launch angle.</em></p>
-          </div>
-          <div ng-show="miss_by >= 0">
-            Projectile will pass {{miss_by}} meters over your target.
-            <p><em>Hint: try decreasing your launch angle.</em></p>
-          </div>
-      </div>
-    </p>
-    <p ng-show="working == 2">
-      Calculating...
-    </p>
+    <div ng-show="show_output">
+      <h3>Output</h3>
+      <p ng-hide="working">
+        <div class='will hit' ng-show="intersects">
+          Target will be hit in {{intersects_in}} seconds!
+        </div>
+        <div class='will miss' ng-hide="intersects"> 
+            <div ng-show="miss_by < 0">
+              Projectile will hit the ground {{Math.round(targetDistance - range)}} meters before the target.
+              <p><em>Hint: try increasing your launch angle.</em></p>
+            </div>
+            <div ng-show="miss_by >= 0">
+              Projectile will pass {{miss_by}} meters over your target.
+              <p><em>Hint: try decreasing your launch angle.</em></p>
+            </div>
+        </div>
+      </p>
+      <p ng-show="working">
+        Calculating...
+      </p>
+    </div>
   </div>
 
   <div id="stats-controller" ng-controller="StatsCtrl">
