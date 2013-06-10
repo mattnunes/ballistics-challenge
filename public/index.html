@@ -45,11 +45,11 @@
       </div>
       <div class='will miss' ng-hide="intersects"> 
           <div ng-show="miss_by < 0">
-            Projectile will hit the ground before the target.
+            Projectile will hit the ground {{targetDistance - range}} meters before the target.
             <p><em>Hint: try increasing your launch angle.</em></p>
           </div>
           <div ng-show="miss_by >= 0">
-            Projectile will miss by {{miss_by}} meters.
+            Projectile will pass {{miss_by}} meters over your target.
             <p><em>Hint: try decreasing your launch angle.</em></p>
           </div>
       </div>

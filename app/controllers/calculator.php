@@ -36,13 +36,15 @@ $app->post('/calculators/intersects-target', function($req, $res){
   $height = $calculator->getHeightAtDistance($targetDist);
   $intersectsTarget = $calculator->intersectsTarget($targetDist, $targetSize);
   $intersectionTime = $calculator->getTimeAtDistance($targetDist);
+  $range = $calculator->getRange();
 
   $res->json(array(
     'params' => $params,
     'results' => array(
       'height' => $height,
       'intersects' => $intersectsTarget,
-      'intersects_in' => $intersectionTime
+      'intersects_in' => $intersectionTime,
+      'range' => $range
     )
   ));
 

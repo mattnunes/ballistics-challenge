@@ -11,6 +11,8 @@ function TrajectoryCtrl($scope, $http) {
     $scope.launchAngle = 0;
 
     $scope.intersects = false;
+    $scope.miss_by = 0;
+    $scope.range = 0;
     $scope.working = false;
   };
 
@@ -36,6 +38,7 @@ function TrajectoryCtrl($scope, $http) {
       $scope.intersects = data.results.intersects;
       $scope.intersects_in = data.results.intersects_in;
       $scope.miss_by = Math.round(data.results.height - $scope.targetSize);
+      $scope.range = data.results.range;
       $scope.working = false;
 
       $(document).trigger('refresh.stats');

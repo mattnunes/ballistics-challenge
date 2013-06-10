@@ -2,9 +2,10 @@
 
   define("DEBUG", true);
 
-  spl_autoload_register(function($className){
-    include "lib/" . $className . ".php";
-  });
+  foreach (glob("lib/*.php") as $filename)
+  {
+    include_once $filename;
+  }
 
   if (!DEBUG) {
     include "lib/error-handling.php";
@@ -14,7 +15,7 @@
 
   foreach (glob("app/*/*.php") as $filename)
   {
-    include $filename;
+    include_once $filename;
   }
 
   $app->handle($_SERVER);
