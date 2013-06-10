@@ -39,13 +39,13 @@
       <a class="btn" href="#" ng-show="intersects" ng-click="init()">Try again!</a>
     </p>
     <h3>Output</h3>
-    <p ng-hide="working">
+    <p ng-hide="working == 1">
       <div class='will hit' ng-show="intersects">
         Target will be hit in {{intersects_in}} seconds!
       </div>
       <div class='will miss' ng-hide="intersects"> 
           <div ng-show="miss_by < 0">
-            Projectile will hit the ground {{targetDistance - range}} meters before the target.
+            Projectile will hit the ground {{Math.round(targetDistance - range)}} meters before the target.
             <p><em>Hint: try increasing your launch angle.</em></p>
           </div>
           <div ng-show="miss_by >= 0">
@@ -54,7 +54,7 @@
           </div>
       </div>
     </p>
-    <p ng-show="working">
+    <p ng-show="working == 2">
       Calculating...
     </p>
   </div>

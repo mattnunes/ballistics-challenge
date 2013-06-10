@@ -13,11 +13,11 @@ function TrajectoryCtrl($scope, $http) {
     $scope.intersects = false;
     $scope.miss_by = 0;
     $scope.range = 0;
-    $scope.working = false;
+    $scope.working = 0;
   };
 
   $scope.onValueChange = function() {
-    $scope.working = true;
+    $scope.working = 2;
 
     var postPayload = {
         launchVelocity: $scope.launchVelocity,
@@ -39,7 +39,7 @@ function TrajectoryCtrl($scope, $http) {
       $scope.intersects_in = data.results.intersects_in;
       $scope.miss_by = Math.round(data.results.height - $scope.targetSize);
       $scope.range = data.results.range;
-      $scope.working = false;
+      $scope.working = 1;
 
       $(document).trigger('refresh.stats');
     });
