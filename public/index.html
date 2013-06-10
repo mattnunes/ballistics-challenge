@@ -39,7 +39,7 @@
       <a class="btn" href="#" ng-show="intersects" ng-click="init()">Try again!</a>
     </p>
     <h3>Output</h3>
-    <p ng-hide="working == 1">
+    <p ng-show="working == 1">
       <div class='will hit' ng-show="intersects">
         Target will be hit in {{intersects_in}} seconds!
       </div>
