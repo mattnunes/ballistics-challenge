@@ -1,0 +1,30 @@
+README
+
+1. Prerequisites
+
+Apache 2.2
+PHP >= 5.3
+MySQL >= 5.6
+
+2. Installation
+
+  2.0 Install App
+    2.0.1 Download code: git clone https://github.com/mattnunes/ballistics-challenge.git
+
+  2.1 Apache Config
+    2.1.1 Config VHost
+    2.1.2 AllowOverrides All
+
+  2.2 PHP Config
+    2.2.1 session.save_path = "/tmp"
+    2.2.2 session.auto_start = 1
+    2.2.3 Install/Configure PDO/MySQL driver.
+
+  2.3 MySQL Config
+    2.3.1 Add database and user with create table/read permissions to db
+    2.3.2 Update lib/application.php and conf/database/setup.php with username/password/database/driver info
+    2.3.3 Run
+          $ cd path/to/app
+          $ php conf/database/setup.php
+
+  2.4 Restart httpd (if you had to make changes)
