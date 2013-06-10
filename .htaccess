@@ -1,8 +1,9 @@
 Options +FollowSymLinks
 RewriteEngine On
 
-# RewriteCond %{REQUEST_FILENAME} !-d
-# RewriteRule ^(.+)/$ http://%{HTTP_HOST}/$1 [R=301,L]
+RewriteRule ^public/ - [L]
+RewriteCond public/$0 -F
+RewriteRule .* public/$0 [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [L]

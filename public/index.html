@@ -1,0 +1,65 @@
+<!doctype html>
+<html ng-app>
+<head>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+  <script src="/js/lib/jquery.min.js"></script>
+  <script src="/js/lib/angular.min.js"></script>
+  <script src="/js/trajectoryCtrl.js"></script>
+  <script src="/js/statsCtrl.js"></script>
+</head>
+<body>
+  <div id="trajectory-controller" ng-controller="TrajectoryCtrl">
+    <h3>Information</h3>
+    <p>
+      <strong>Projectile weight:</strong> {{projectileWeight}} lbs
+    </p>
+    <p>
+      <strong>Distance to target:</strong> {{targetDistance}} meters
+    </p>
+    <p>
+      <strong>Target size:</strong> {{targetSize}} meters
+    </p>
+    <h3>Input</h3>
+    <p>
+      <label>Launch velocity:</label>
+
+      <select ng-model="launchVelocity">
+        <option ng-repeat="launchVelocity in launchVelocities">
+          {{launchVelocity}}
+        </option>
+      </select> m/s
+    </p>
+    <p>
+      <label>Launch angle:</label>
+      <input type="text" ng-model="launchAngle" placeholder="Launch Angle"> degrees
+    </p>
+    <p>
+      <a href="#" ng-click="onValueChange()">Fire!</a>
+    </p>
+    <h3>Output</h3>
+    <p ng-hide="working">
+      <div class='will hit' ng-show="intersects">
+        Target will be hit in {{intersects_in}} seconds!
+      </div>
+      <div class='will miss' ng-hide="intersects"> 
+          <div ng-show="miss_by < 0">
+            Projectile will hit the ground before the target.
+            <p><em>Hint: try increasing your launch angle.</em></p>
+          </div>
+          <div ng-show="miss_by >= 0">
+            Projectile will miss by {{miss_by}} meters.
+            <p><em>Hint: try decreasing your launch angle.</em></p>
+          </div>
+      </div>
+    </p>
+    <p ng-show="working">
+      Calculating...
+    </p>
+  </div>
+
+  <div id="stats-controller" ng-controller="StatsCtrl">
+    <h3>Stats</h3>
+  </div>
+</body>
+</html>

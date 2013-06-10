@@ -1,0 +1,19 @@
+.will {
+  font-weight: bold;
+}
+
+.hit {
+  color: green;
+}
+
+.miss {
+  color: red;
+}
+
+#trajectory-controller {
+  float: left;
+}
+
+#stats-controller {
+  float: right;
+}

@@ -1,0 +1,3 @@
+function StatsCtrl($scope, $http) {
+
+}
