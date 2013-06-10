@@ -35,7 +35,8 @@
       <input type="text" ng-model="launchAngle" placeholder="Launch Angle"> degrees
     </p>
     <p>
-      <a href="#" ng-click="onValueChange()">Fire!</a>
+      <a class="btn" href="#" ng-hide="intersects" ng-click="onValueChange()">Fire!</a>
+      <a class="btn" href="#" ng-show="intersects" ng-click="init()">Try again!</a>
     </p>
     <h3>Output</h3>
     <p ng-hide="working">
@@ -59,7 +60,66 @@
   </div>
 
   <div id="stats-controller" ng-controller="StatsCtrl">
-    <h3>Stats</h3>
+    Total users: <strong>{{userCount}}</strong><br>
+    Shots fired: <strong>{{shotCount}}</strong>
+
+    <div ng-hide="top5.length">
+      <h3>No Ranking Data</h3>
+    </div>
+    <div ng-show="top5.length">
+      <h3>My Stats</h3>
+      <table>
+        <tr>
+          <td colspan=2>User id #{{me.session_id}}</td>
+        </tr>
+        <tr>
+          <td>Ranking:</td>
+          <td><strong>#{{me.rank}}</strong></td>
+        </tr>
+        <tr>
+          <td>Total shots:</td>
+          <td><strong>{{me.totalShots}}</strong></td>
+        </tr>
+        <tr>
+          <td>Total hits:</td>
+          <td><strong>{{me.totalHits}}</strong></td>
+        </tr>
+        <tr>
+          <td>Accuracy:</td>
+          <td><strong>{{me.accuracy}}</strong></td>
+        </tr>
+        <tr>
+          <td>Avg Shots/hit:</td>
+          <td><strong>{{me.shotsPerHit}}</strong></td>
+        </tr>
+      </table>
+    </div>
+
+    <div ng-show="top5.length">
+      <h3>Top 5</h3>
+      <ol>
+        <li ng-repeat='user in top5'>User id #{{user.session_id}}
+          <table>
+            <tr>
+              <td>Total shots:</td>
+              <td><strong>{{user.totalShots}}</strong></td>
+            </tr>
+            <tr>
+              <td>Total hits:</td>
+              <td><strong>{{user.totalHits}}</strong></td>
+            </tr>
+            <tr>
+              <td>Accuracy:</td>
+              <td><strong>{{user.accuracy}}</strong></td>
+            </tr>
+            <tr>
+              <td>Avg Shots/hit:</td>
+              <td><strong>{{user.shotsPerHit}}</strong></td>
+            </tr>
+          </table>
+        </li>
+      </ol>
+    </div>
   </div>
 </body>
 </html>

@@ -45,6 +45,10 @@ $app->post('/calculators/intersects-target', function($req, $res){
       'intersects_in' => $intersectionTime
     )
   ));
+
+  $params['hit_target'] = ($intersectsTarget ? 1 : 0);
+  $params['time_to_target'] = $intersectionTime;
+  Session::currentSession()->logTrajectory($params);
 });
 
 ?>

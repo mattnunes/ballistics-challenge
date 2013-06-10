@@ -1,3 +1,8 @@
+* {
+  font-family: 'Helvetica', sans-serif;
+  font-size: 12pt;
+}
+
 .will {
   font-weight: bold;
 }
@@ -16,4 +21,23 @@
 
 #stats-controller {
   float: right;
+}
+
+.btn {
+  padding: 5px 20px;
+  border: 1px solid #444;
+
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+
+  text-decoration: none;
+  color: #1b1b1b;
+}
+
+.btn:hover {
+  background-color: #1589FF;
+  color: white;
 }

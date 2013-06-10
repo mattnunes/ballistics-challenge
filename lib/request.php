@@ -6,6 +6,7 @@ class Request
   public $method;
   public $query;
   public $params;
+  public $session;
   public $route;
   public $pattern;
   public $path_matches;
@@ -16,6 +17,7 @@ class Request
     $this->method = $request['REQUEST_METHOD'];
     $this->query = (object)$_GET;
     $this->params = (object)$_POST;
+    $this->session = Session::currentSession();
 
     if (DEBUG) {
       $this->_SERVER = $request;
