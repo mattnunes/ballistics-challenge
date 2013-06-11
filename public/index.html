@@ -2,125 +2,130 @@
 <html ng-app>
 <head>
   <title></title>
-  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.min.css">
+  <script src="/js/bootstrap.js"></script>
   <script src="/js/lib/jquery.min.js"></script>
   <script src="/js/lib/angular.min.js"></script>
   <script src="/js/trajectoryCtrl.js"></script>
   <script src="/js/statsCtrl.js"></script>
 </head>
-<body>
-  <div id="trajectory-controller" ng-controller="TrajectoryCtrl">
-    <h3>Information</h3>
-    <p>
-      <strong>Projectile weight:</strong> {{projectileWeight}} lbs
-    </p>
-    <p>
-      <strong>Distance to target:</strong> {{targetDistance}} meters
-    </p>
-    <p>
-      <strong>Target size:</strong> {{targetSize}} meters
-    </p>
-    <h3>Input</h3>
-    <p>
-      <label>Launch velocity:</label>
-
-      <select ng-model="launchVelocity">
-        <option ng-repeat="launchVelocity in launchVelocities">
-          {{launchVelocity}}
-        </option>
-      </select> m/s
-    </p>
-    <p>
-      <label>Launch angle:</label>
-      <input type="text" ng-model="launchAngle" placeholder="Launch Angle"> degrees
-    </p>
-    <p>
-      <a class="btn" href="#" ng-hide="intersects" ng-click="onValueChange()">Fire!</a>
-      <a class="btn" href="#" ng-show="intersects" ng-click="init()">Try again!</a>
-    </p>
-    <div ng-show="show_output">
-      <h3>Output</h3>
-      <p ng-hide="working">
-        <div class='will hit' ng-show="intersects">
-          Target will be hit in {{intersects_in}} seconds!
-        </div>
-        <div class='will miss' ng-hide="intersects"> 
-            <div ng-show="miss_by < 0">
-              Projectile will hit the ground {{miss_by_range}} meters before the target.
-              <p><em>Hint: try increasing your launch angle.</em></p>
-            </div>
-            <div ng-show="miss_by >= 0">
-              Projectile will pass {{miss_by}} meters over your target.
-              <p><em>Hint: try decreasing your launch angle.</em></p>
-            </div>
-        </div>
+<body class="container">
+  <div class="row">
+    <div class="span6" ng-controller="TrajectoryCtrl">
+      <h3>Shot Information</h3>
+      <p>
+        <strong>Projectile weight:</strong> {{projectileWeight}} lbs
       </p>
-      <p ng-show="working">
-        Calculating...
+      <p>
+        <strong>Distance to target:</strong> {{targetDistance}} meters
       </p>
-    </div>
-  </div>
+      <p>
+        <strong>Target size:</strong> {{targetSize}} meters
+      </p>
+      <h3>Gunner Input</h3>
+      <p>
+        <label>Launch velocity:</label>
 
-  <div id="stats-controller" ng-controller="StatsCtrl">
-    Total users: <strong>{{userCount}}</strong><br>
-    Shots fired: <strong>{{shotCount}}</strong>
-
-    <div ng-hide="top5.length">
-      <h3>No Ranking Data</h3>
+        <select ng-model="launchVelocity">
+          <option ng-repeat="launchVelocity in launchVelocities">
+            {{launchVelocity}}
+          </option>
+        </select> m/s
+      </p>
+      <p>
+        <label>Launch angle:</label>
+        <input type="text" ng-model="launchAngle" placeholder="Launch Angle"> degrees
+      </p>
+      <p>
+        <a class="btn btn-danger" href="#" ng-hide="intersects" ng-click="onValueChange()">Fire!</a>
+        <a class="btn btn-primary" href="#" ng-show="intersects" ng-click="init()">Try again!</a>
+      </p>
+      <div ng-show="show_output">
+        <h3>Output</h3>
+        <p ng-hide="working">
+          <div class='text-success' ng-show="intersects">
+            Target will be hit in {{intersects_in}} seconds!
+          </div>
+          <div class='text-error' ng-hide="intersects"> 
+              <div ng-show="miss_by < 0">
+                Projectile will hit the ground <strong>{{miss_by_range}}</strong> meters before the target.
+                <p class="muted"><em>Hint: try increasing your launch angle.</em></p>
+              </div>
+              <div ng-show="miss_by >= 0">
+                Projectile will pass <strong>{{miss_by}}</strong> meters over your target.
+                <p class="muted"><em>Hint: try decreasing your launch angle.</em></p>
+              </div>
+          </div>
+        </p>
+        <p ng-show="working">
+          Calculating...
+        </p>
+      </div>
     </div>
-    <div ng-show="top5.length">
-      <h3>My Stats</h3>
-      <table>
-        <tr>
-          <td colspan=2>User id #{{me.session_id}}</td>
-        </tr>
-        <tr>
-          <td>Ranking:</td>
-          <td><strong>#{{me.rank}}</strong></td>
-        </tr>
-        <tr>
-          <td>Total shots:</td>
-          <td><strong>{{me.totalShots}}</strong></td>
-        </tr>
-        <tr>
-          <td>Total hits:</td>
-          <td><strong>{{me.totalHits}}</strong></td>
-        </tr>
-        <tr>
-          <td>Accuracy:</td>
-          <td><strong>{{me.accuracy}}</strong></td>
-        </tr>
-        <tr>
-          <td>Avg Shots/hit:</td>
-          <td><strong>{{me.shotsPerHit}}</strong></td>
-        </tr>
-      </table>
-    </div>
 
-    <div ng-show="top5.length">
-      <h3>Top 5</h3>
-      <ol>
-        <li ng-repeat='user in top5'>User id #{{user.session_id}}
-          <table>
-            <tr>
-              <td>Total shots:</td>
-              <td><strong>{{user.totalShots}}</strong></td>
-            </tr>
-            <tr>
-              <td>Total hits:</td>
-              <td><strong>{{user.totalHits}}</strong></td>
-            </tr>
-            <tr>
-              <td>Accuracy:</td>
-              <td><strong>{{user.accuracy}}</strong></td>
-            </tr>
-            <tr>
-              <td>Avg Shots/hit:</td>
-              <td><strong>{{user.shotsPerHit}}</strong></td>
-            </tr>
-          </table>
-        </li>
-      </ol>
+    <div class="span6" ng-controller="StatsCtrl">
+      <div ng-hide="top5.length">
+        <h3>No Ranking Data</h3>
+      </div>
+      <div ng-show="top5.length">
+        <h3>My Stats</h3>
+        <table>
+          <tr>
+            <td colspan=2>User id #{{me.session_id}}</td>
+          </tr>
+          <tr>
+            <td>Ranking:</td>
+            <td><strong>#{{me.rank}}</strong></td>
+          </tr>
+          <tr>
+            <td>Total shots:</td>
+            <td><strong>{{me.totalShots}}</strong></td>
+          </tr>
+          <tr>
+            <td>Total hits:</td>
+            <td><strong>{{me.totalHits}}</strong></td>
+          </tr>
+          <tr>
+            <td>Accuracy:</td>
+            <td><strong>{{me.accuracy}}</strong></td>
+          </tr>
+          <tr>
+            <td>Avg Shots/hit:</td>
+            <td><strong>{{me.shotsPerHit}}</strong></td>
+          </tr>
+        </table>
+      </div>
+
+      <div ng-show="top5.length">
+        <h3>Top 5</h3>
+        <p>
+          Total users: <strong>{{userCount}}</strong><br>
+          Shots fired: <strong>{{shotCount}}</strong>
+        </p>
+        <ol>
+          <li ng-repeat='user in top5'>User id #{{user.session_id}}
+            <table>
+              <tr>
+                <td>Total shots:</td>
+                <td><strong>{{user.totalShots}}</strong></td>
+              </tr>
+              <tr>
+                <td>Total hits:</td>
+                <td><strong>{{user.totalHits}}</strong></td>
+              </tr>
+              <tr>
+                <td>Accuracy:</td>
+                <td><strong>{{user.accuracy}}</strong></td>
+              </tr>
+              <tr>
+                <td>Avg Shots/hit:</td>
+                <td><strong>{{user.shotsPerHit}}</strong></td>
+              </tr>
+            </table>
+          </li>
+        </ol>
+      </div>
     </div>
   </div>
 </body>
